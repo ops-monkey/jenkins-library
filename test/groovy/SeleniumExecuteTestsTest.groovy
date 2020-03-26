@@ -59,12 +59,9 @@ class SeleniumExecuteTestsTest extends BasePiperTest {
     @Test
     void testExecuteSeleniumDefault() {
         def expectedDefaultEnvVars = [
-            // following env vars are expected in JSON format
-            'PIPER_CONTAINER_PORT_MAPPING': '{"selenium/standalone-chrome":[{"containerPort":4444,"hostPort":4444}]}',
-            'PIPER_DOCKER_NAME': '"npm"',
-            'PIPER_DOCKER_IMAGE': '"node:lts-stretch"',
-            'PIPER_SIDECAR_NAME': '"selenium"',
-            'PIPER_SIDECAR_IMAGE': '"selenium/standalone-chrome"'
+            'PIPER_SELENIUM_HOSTNAME': 'npm',
+            'PIPER_SELENIUM_WEBDRIVER_HOSTNAME': 'selenium',
+            'PIPER_SELENIUM_WEBDRIVER_PORT': '4444'
         ]
 
         stepRule.step.seleniumExecuteTests(
@@ -85,6 +82,42 @@ class SeleniumExecuteTestsTest extends BasePiperTest {
         expectedDefaultEnvVars.each { key, value ->
             assert dockerExecuteRule.dockerParams.dockerEnvVars[key] == value
         }
+    }
+
+    @Test
+    void testNoNullPointerExceptionWithEmptyContainerPortMapping() {
+        nullScript.commonPipelineEnvironment.configuration = [steps:[seleniumExecuteTests:[
+            containerPortMappings: []
+        ]]]
+
+        stepRule.step.seleniumExecuteTests(
+            script: nullScript,
+            juStabUtils: utils
+        ) {
+            bodyExecuted = true
+        }
+        assertThat(bodyExecuted, is(true))
+        assert dockerExecuteRule.dockerParams.dockerEnvVars.PIPER_SELENIUM_WEBDRIVER_PORT == null
+    }
+
+    @Test
+    void testNoNullPointerExceptionWithUnrelatedSidecarImageAndContainerPortMapping() {
+        nullScript.commonPipelineEnvironment.configuration = [steps:[seleniumExecuteTests:[
+            sidecarImage: 'myCustomImage',
+            containerPortMappings: [
+                'someImageOtherThanMyCustomImage': [
+                    [containerPort: 5555, hostPort: 5555]
+                ]
+            ]
+        ]]]
+        stepRule.step.seleniumExecuteTests(
+            script: nullScript,
+            juStabUtils: utils
+        ) {
+            bodyExecuted = true
+        }
+        assertThat(bodyExecuted, is(true))
+        assert dockerExecuteRule.dockerParams.dockerEnvVars.PIPER_SELENIUM_WEBDRIVER_PORT == null
     }
 
     @Test

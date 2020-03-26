@@ -25,8 +25,8 @@ import groovy.transform.Field
  * Initializes the [`commonPipelineEnvironment`](commonPipelineEnvironment.md), which is used throughout the complete pipeline.
  *
  * !!! tip
- *    This step needs to run at the beginning of a pipeline right after the SCM checkout.
- *    Then subsequent pipeline steps consume the information from `commonPipelineEnvironment`; it does not need to be passed to pipeline steps explicitly.
+ *     This step needs to run at the beginning of a pipeline right after the SCM checkout.
+ *     Then subsequent pipeline steps consume the information from `commonPipelineEnvironment`; it does not need to be passed to pipeline steps explicitly.
  */
 @GenerateDocumentation
 void call(Map parameters = [:]) {
@@ -36,6 +36,12 @@ void call(Map parameters = [:]) {
         def script = checkScript(this, parameters)
 
         prepareDefaultValues script: script, customDefaults: parameters.customDefaults
+
+        List customDefaults = ['default_pipeline_environment.yml'].plus(parameters.customDefaults?:[])
+        customDefaults.each {
+            cd ->
+                writeFile file: ".pipeline/${cd}", text: libraryResource(cd)
+        }
 
         String configFile = parameters.get('configFile')
 
