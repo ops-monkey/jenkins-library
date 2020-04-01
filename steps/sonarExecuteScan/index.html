@@ -1651,6 +1651,12 @@
 </thead>
 <tbody>
 <tr>
+<td><code>branchName</code></td>
+<td>no</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td><code>customTlsCertificateLinks</code></td>
 <td>no</td>
 <td></td>
@@ -1743,6 +1749,7 @@
 </tbody>
 </table>
 <ul>
+<li><code>branchName</code> - Non-Pull-Request voting only: Name of the SonarQube branch that should be used to report findings to. If empty, SonarQube uses its main branch per default.</li>
 <li><code>customTlsCertificateLinks</code> - List containing download links of custom TLS certificates. This is required to ensure trusted connections to instances with custom certificates.</li>
 <li><code>disableInlineComments</code> - Pull-Request voting only: Disables the pull-request decoration with inline comments. deprecated: only supported below SonarQube v7.2</li>
 <li><code>dockerImage</code> - Name of the docker image that should be used. If empty, Docker is not used and the command is executed directly on the Jenkins system. see <a href="../dockerExecute/">dockerExecute</a></li>
@@ -1771,6 +1778,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>branchName</code></td>
+<td></td>
+<td>X</td>
+</tr>
 <tr>
 <td><code>customTlsCertificateLinks</code></td>
 <td></td>
