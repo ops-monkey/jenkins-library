@@ -876,15 +876,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-configuration" title="Step configuration" class="md-nav__link">
-    Step configuration
+  <a href="#details" title="Details" class="md-nav__link">
+    Details
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#dependencies" title="Dependencies" class="md-nav__link">
-    Dependencies
+  <a href="#we-recommend-to-define-values-of-step-parameters-via-configyml-file" title="We recommend to define values of step parameters via config.yml file." class="md-nav__link">
+    We recommend to define values of step parameters via config.yml file.
   </a>
   
 </li>
@@ -1155,6 +1155,18 @@
   <li class="md-nav__item">
     <a href="../mavenExecute/" title="mavenExecute" class="md-nav__link">
       mavenExecute
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mavenExecuteStaticCodeChecks/" title="mavenExecuteStaticCodeChecks" class="md-nav__link">
+      mavenExecuteStaticCodeChecks
     </a>
   </li>
 
@@ -1566,15 +1578,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#step-configuration" title="Step configuration" class="md-nav__link">
-    Step configuration
+  <a href="#details" title="Details" class="md-nav__link">
+    Details
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#dependencies" title="Dependencies" class="md-nav__link">
-    Dependencies
+  <a href="#we-recommend-to-define-values-of-step-parameters-via-configyml-file" title="We recommend to define values of step parameters via config.yml file." class="md-nav__link">
+    We recommend to define values of step parameters via config.yml file.
   </a>
   
 </li>
@@ -1607,11 +1619,13 @@
                 
                 <h1 id="cloudfoundrycreateservicekey">cloudFoundryCreateServiceKey<a class="headerlink" href="#cloudfoundrycreateservicekey" title="Permanent link">&para;</a></h1>
 <h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h2>
-<p>Step that creates a service key for a specified service instance on Cloud Foundry</p>
+<p>Create CloudFoundryServiceKey</p>
 <h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <ul>
+<li>This step is for creating a Service Key for an existing Service in Cloud Foundry.</li>
 <li>Cloud Foundry API endpoint, organization, space, user and service instance are available</li>
 <li>Credentials have been configured in Jenkins with a dedicated Id</li>
+<li>Additionally you can set the optional serviceKeyConfig flag to configure the Service Key creation with your respective JSON configuration.</li>
 </ul>
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
@@ -1625,81 +1639,102 @@
 </thead>
 <tbody>
 <tr>
-<td><code>cloudFoundry/apiEndpoint</code></td>
-<td>yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>cloudFoundry/credentialsId</code></td>
-<td>yes</td>
-<td></td>
+<td>cfApiEndpoint</td>
+<td>Yes</td>
+<td><nil></td>
 <td></td>
 </tr>
 <tr>
-<td><code>cloudFoundry/org</code></td>
-<td>yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>cloudFoundry/serviceInstance</code></td>
-<td>yes</td>
-<td></td>
+<td>cfCredentialsId</td>
+<td>Yes</td>
+<td><nil></td>
 <td></td>
 </tr>
 <tr>
-<td><code>cloudFoundry/serviceKey</code></td>
-<td>yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>cloudFoundry/serviceKeyConfig</code></td>
-<td>no</td>
-<td></td>
+<td>cfOrg</td>
+<td>Yes</td>
+<td><nil></td>
 <td></td>
 </tr>
 <tr>
-<td><code>cloudFoundry/space</code></td>
-<td>yes</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td><code>dockerImage</code></td>
-<td>no</td>
-<td><code>ppiper/cf-cli</code></td>
+<td>cfServiceInstance</td>
+<td>Yes</td>
+<td><nil></td>
 <td></td>
 </tr>
 <tr>
-<td><code>dockerWorkspace</code></td>
-<td>no</td>
-<td><code>/home/piper</code></td>
+<td>cfServiceKeyConfig</td>
+<td>No</td>
+<td><nil></td>
 <td></td>
 </tr>
 <tr>
-<td><code>script</code></td>
-<td>yes</td>
+<td>cfServiceKeyName</td>
+<td>Yes</td>
+<td><nil></td>
 <td></td>
+</tr>
+<tr>
+<td>cfSpace</td>
+<td>Yes</td>
+<td><nil></td>
+<td></td>
+</tr>
+<tr>
+<td>dockerImage</td>
+<td>No</td>
+<td>ppiper/cf-cli <br></td>
+<td></td>
+</tr>
+<tr>
+<td>dockerName</td>
+<td>No</td>
+<td>cf <br></td>
+<td></td>
+</tr>
+<tr>
+<td>dockerPullImage</td>
+<td>No</td>
+<td>false <br></td>
+<td></td>
+</tr>
+<tr>
+<td>dockerWorkspace</td>
+<td>No</td>
+<td>\<empty\> <br></td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td>Yes</td>
+<td><nil></td>
+<td></td>
+</tr>
+<tr>
+<td>username</td>
+<td>Yes</td>
+<td><nil></td>
 <td></td>
 </tr>
 </tbody>
 </table>
+<h2 id="details">Details<a class="headerlink" href="#details" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>cloudFoundry/apiEndpoint</code> - Cloud Foundry API endpoint.</li>
-<li><code>cloudFoundry/credentialsId</code> - Cloud Foundry credentials.</li>
-<li><code>cloudFoundry/org</code> - Cloud Foundry target organization.</li>
-<li><code>cloudFoundry/serviceInstance</code> - Cloud Foundry service instance, for which the service key will be created.</li>
-<li><code>cloudFoundry/serviceKey</code> - Cloud Foundry service key, which will be created.</li>
-<li><code>cloudFoundry/serviceKeyConfig</code> - Cloud Foundry service key configuration.</li>
-<li><code>cloudFoundry/space</code> - Cloud Foundry target space.</li>
-<li><code>dockerImage</code> - Name of the docker image that should be used. Configure with empty value to execute the command directly on the Jenkins system (not using a container). Omit to use the default image (cf. <a href="https://github.com/SAP/jenkins-library/blob/master/resources/default_pipeline_environment.yml">default_pipeline_environment.yml</a>) Overwrite to use custom Docker image.</li>
-<li><code>dockerWorkspace</code> - Kubernetes only: Specifies a dedicated user home directory for the container which will be passed as value for environment variable <code>HOME</code>.</li>
-<li><code>script</code> - The common script environment of the Jenkinsfile running. Typically the reference to the script calling the pipeline step is provided with the <code>this</code> parameter, as in <code>script: this</code>. This allows the function to access the <code>commonPipelineEnvironment</code> for retrieving, e.g. configuration parameters.</li>
+<li><code>cfApiEndpoint</code> :  Cloud Foundry API endpoint </li>
+<li><code>cfCredentialsId</code> :  Jenkins credentials ID containing user and password to authenticate to the Cloud Foundry API </li>
+<li><code>cfOrg</code> :  CF org </li>
+<li><code>cfServiceInstance</code> :  Parameter of ServiceInstance Name to delete CloudFoundry Service </li>
+<li><code>cfServiceKeyConfig</code> :  Configuration for Service Key Creation </li>
+<li><code>cfServiceKeyName</code> :  Parameter of CloudFoundry Service Key to be created </li>
+<li><code>cfSpace</code> :  CF Space </li>
+<li><code>dockerImage</code> :  Name of the docker image that should be used. If empty, Docker is not used and the command is executed directly on the Jenkins system. </li>
+<li><code>dockerName</code> :  Kubernetes only: Name of the container launching dockerImage. SideCar only: Name of the container in local network. </li>
+<li><code>dockerPullImage</code> :  Set this to 'false' to bypass a docker image pull. Usefull during development process. Allows testing of images which are available in the local registry only. </li>
+<li><code>dockerWorkspace</code> :  Kubernetes only: Specifies a dedicated user home directory for the container which will be passed as value for environment variable HOME. </li>
+<li><code>password</code> :  User Password for CF User </li>
+<li><code>username</code> :  User or E-Mail for CF </li>
 </ul>
-<h2 id="step-configuration">Step configuration<a class="headerlink" href="#step-configuration" title="Permanent link">&para;</a></h2>
-<p>We recommend to define values of step parameters via <a href="../../configuration/">config.yml file</a>.</p>
+<h2 id="we-recommend-to-define-values-of-step-parameters-via-configyml-file">We recommend to define values of step parameters via <a href="../../configuration/">config.yml file</a>.<a class="headerlink" href="#we-recommend-to-define-values-of-step-parameters-via-configyml-file" title="Permanent link">&para;</a></h2>
 <p>In following sections of the config.yml the configuration is possible:</p>
 <table>
 <thead>
@@ -1711,73 +1746,67 @@
 </thead>
 <tbody>
 <tr>
-<td><code>cloudFoundry/apiEndpoint</code></td>
+<td>cfApiEndpoint</td>
 <td>X</td>
 <td>X</td>
 </tr>
 <tr>
-<td><code>cloudFoundry/credentialsId</code></td>
+<td>cfOrg</td>
 <td>X</td>
 <td>X</td>
 </tr>
 <tr>
-<td><code>cloudFoundry/org</code></td>
-<td>X</td>
-<td>X</td>
-</tr>
-<tr>
-<td><code>cloudFoundry/serviceInstance</code></td>
-<td>X</td>
-<td>X</td>
-</tr>
-<tr>
-<td><code>cloudFoundry/serviceKey</code></td>
-<td>X</td>
-<td>X</td>
-</tr>
-<tr>
-<td><code>cloudFoundry/serviceKeyConfig</code></td>
-<td>X</td>
-<td>X</td>
-</tr>
-<tr>
-<td><code>cloudFoundry/space</code></td>
-<td>X</td>
-<td>X</td>
-</tr>
-<tr>
-<td><code>dockerImage</code></td>
-<td>X</td>
-<td>X</td>
-</tr>
-<tr>
-<td><code>dockerWorkspace</code></td>
-<td>X</td>
-<td>X</td>
-</tr>
-<tr>
-<td><code>script</code></td>
+<td>cfServiceInstance</td>
 <td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>cfServiceKeyConfig</td>
 <td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>cfServiceKeyName</td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>cfSpace</td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>dockerImage</td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>dockerName</td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>dockerPullImage</td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>dockerWorkspace</td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>password</td>
+<td></td>
+<td>X</td>
+</tr>
+<tr>
+<td>username</td>
+<td></td>
+<td>X</td>
 </tr>
 </tbody>
 </table>
-<h2 id="dependencies">Dependencies<a class="headerlink" href="#dependencies" title="Permanent link">&para;</a></h2>
-<p>The step depends on the following Jenkins plugins</p>
-<ul>
-<li><a href="https://plugins.jenkins.io/credentials-binding">credentials-binding</a></li>
-<li><a href="https://plugins.jenkins.io/docker">docker</a></li>
-<li><a href="https://plugins.jenkins.io/kubernetes">kubernetes</a></li>
-<li><a href="https://plugins.jenkins.io/pipeline-utility-steps">pipeline-utility-steps</a></li>
-<li><a href="https://plugins.jenkins.io/workflow-basic-steps">workflow-basic-steps</a></li>
-<li><a href="https://plugins.jenkins.io/workflow-cps-global-lib">workflow-cps-global-lib</a></li>
-<li><a href="https://plugins.jenkins.io/workflow-durable-task-step">workflow-durable-task-step</a></li>
-</ul>
-<p>The kubernetes plugin is only used if running in a kubernetes environment.
-Transitive dependencies are omitted.</p>
-<p>The list might be incomplete.</p>
-<p>Consider using the <a href="https://cloud.docker.com/u/ppiper/repository/docker/ppiper/jenkins-master">ppiper/jenkins-master</a>
-docker image. This images comes with preinstalled plugins.</p>
 <h2 id="example">Example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h2>
 <p>The following example creates a service key named "myServiceKey" for the service instance "myServiceInstance" in the provided cloud foundry organization and space. For the service key creation, the serviceKeyConfig is used.</p>
 <div class="codehilite"><pre><span></span><span class="n">cloudFoundryCreateServiceKey</span><span class="o">(</span>
@@ -1788,7 +1817,7 @@ docker image. This images comes with preinstalled plugins.</p>
       <span class="nl">org:</span> <span class="s1">&#39;cfOrg&#39;</span><span class="o">,</span>
       <span class="nl">space:</span> <span class="s1">&#39;cfSpace&#39;</span><span class="o">,</span>
       <span class="nl">serviceInstance:</span> <span class="s1">&#39;myServiceInstance&#39;</span><span class="o">,</span>
-      <span class="nl">serviceKey:</span> <span class="s1">&#39;myServiceKey&#39;</span><span class="o">,</span>
+      <span class="nl">serviceKeyName:</span> <span class="s1">&#39;myServiceKey&#39;</span><span class="o">,</span>
       <span class="nl">serviceKeyConfig:</span> <span class="s1">&#39;{ \&quot;key\&quot; : \&quot;value\&quot; }&#39;</span>
   <span class="o">])</span>
 </pre></div>

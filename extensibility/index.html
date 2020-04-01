@@ -1189,6 +1189,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../steps/mavenExecuteStaticCodeChecks/" title="mavenExecuteStaticCodeChecks" class="md-nav__link">
+      mavenExecuteStaticCodeChecks
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../steps/mtaBuild/" title="mtaBuild" class="md-nav__link">
       mtaBuild
     </a>
@@ -1712,6 +1724,11 @@ This is due to how Groovy loads scripts internally.</p>
 <p class="admonition-title">Init stage cannot be extended</p>
 <p>Please note that the <code>Init</code> stage also checks out your current repository including your extensions.<br />
 Therefore, it is not possible to use extensions on this stage.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Disable Extensions Execution</p>
+<p>By default, there is a possibility for extensions to get executed. In case of disabling it, please ensure to set <code>PIPER_DISABLE_EXTENSIONS</code> to <code>true</code>.
+Setting this parameter to <code>true</code> excludes the execution of extension files in <code>.pipeline/extensions/&lt;StageName&gt;.groovy</code>.</p>
 </div>
 <h3 id="practical-example">Practical example<a class="headerlink" href="#practical-example" title="Permanent link">&para;</a></h3>
 <p>For a more practical example, you can use extensions in the SAP Cloud SDK pipeline to add custom linters to your pipeline.</p>
